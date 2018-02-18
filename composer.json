@@ -1,0 +1,28 @@
+{
+    "name": "vincenttouzet/rethinkdb-odm",
+    "description": "RethinkDB ODM",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vincent Touzet",
+            "email": "vincent.touzet@gmail.com"
+        }
+    ],
+    "require": {
+        "danielmewes/php-rql": "^2.3",
+        "symfony/property-access": "^3.0 || ^4.0",
+        "ramsey/uuid": "^3.0"
+    },
+    "require-dev": {
+        "symfony/http-kernel": "^3.0 || ^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "RethinkDB\\ODM\\": "lib"
+        }
+    },
+    "suggest": {
+        "symfony/http-kernel": "Needed to use integration for Symfony bundle"
+    }
+}

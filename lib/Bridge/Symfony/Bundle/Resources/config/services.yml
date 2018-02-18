@@ -1,0 +1,30 @@
+services:
+    rethinkdb_odm.connection:
+        class: \r\Connection
+        arguments:
+            -
+              host:     '%rethinkdb_odm.connection.host%'
+              port:     '%rethinkdb_odm.connection.port%'
+              user:     '%rethinkdb_odm.connection.user%'
+              password: '%rethinkdb_odm.connection.password%'
+              db:       '%rethinkdb_odm.connection.database%'
+
+    rethinkdb_odm.manager:
+        class: RethinkDB\ODM\Manager
+        arguments:
+            - '@rethinkdb_odm.connection'
+            - '@rethinkdb_odm.class_metadata.registry'
+            - '@rethindb_odm.document_repository.registry'
+        public: true
+
+    rethinkdb_odm.class_metadata.registry:
+        class: RethinkDB\ODM\Metadata\ClassMetadataRegistry
+        arguments:
+            - '@rethinkdb_odm.class_metadata.loader'
+
+    rethindb_odm.document_repository.registry:
+        class: RethinkDB\ODM\Repository\DocumentRepositoryRegistry
+        arguments:
+            - '@rethinkdb_odm.class_metadata.registry'
+        calls:
+            - [setManager, ['@rethinkdb_odm.manager']]
