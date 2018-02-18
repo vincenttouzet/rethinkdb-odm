@@ -30,9 +30,9 @@ class ClassMetadata
 
     public function __construct($class, $table, $repositoryClass = DocumentRepository::class)
     {
-        $this->class = $class;
-        $this->table = $table;
-        $this->repositoryClass = $repositoryClass;
+        $this->setClass($class);
+        $this->setTable($table);
+        $this->setRepositoryClass($repositoryClass);
     }
 
     /**

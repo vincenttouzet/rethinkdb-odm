@@ -11,6 +11,7 @@
 
 namespace RethinkDB\ODM\Metadata\Loader;
 
+use RethinkDB\ODM\Exception\MissingMappingInfoException;
 use RethinkDB\ODM\Metadata\ClassMetadata;
 
 /**
@@ -23,7 +24,7 @@ class ArrayLoader implements LoaderInterface
     /** @var array */
     protected $mappings = [];
 
-    public function __construct($mappings)
+    public function __construct(array $mappings)
     {
         $this->mappings = $mappings;
     }
@@ -36,7 +37,16 @@ class ArrayLoader implements LoaderInterface
         $metadatas = [];
 
         foreach ($this->mappings as $mapping) {
+            if (!isset($mapping['class']) || empty($mapping['class'])) {
+                throw new MissingMappingInfoException('class');
+            }
+            if (!isset($mapping['table']) || empty($mapping['table'])) {
+                throw new MissingMappingInfoException('table');
+            }
             $classMetadata = new ClassMetadata($mapping['class'], $mapping['table']);
+            if (isset($mapping['repositoryClass'])) {
+                $classMetadata->setRepositoryClass($mapping['repositoryClass']);
+            }
             $metadatas[] = $classMetadata;
         }
 
