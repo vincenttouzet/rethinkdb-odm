@@ -1,0 +1,18 @@
+<?php
+
+$connection = new \r\Connection([
+    'host'     => 'localhost',
+    'port'     => 28015,
+    'db'       => 'database',
+    'user'     => 'admin',
+    'password' => null,
+]);
+
+// configure how your Document are mapped
+$loader = new \RethinkDB\ODM\Metadata\Loader\ArrayLoader([]);
+
+$classMetadataRegistry = new \RethinkDB\ODM\Metadata\ClassMetadataRegistry($loader);
+
+$repositoryRegistry = new \RethinkDB\ODM\Repository\DocumentRepositoryRegistry($classMetadataRegistry);
+
+return new \RethinkDB\ODM\Manager($connection, $classMetadataRegistry, $repositoryRegistry);
