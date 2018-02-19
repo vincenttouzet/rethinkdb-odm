@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -12,7 +12,7 @@
 namespace RethinkDB\ODM\Exception;
 
 /**
- * Class ClassMetadataNotFoundException
+ * Class ClassMetadataNotFoundException.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */

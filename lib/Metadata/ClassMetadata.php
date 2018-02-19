@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -14,16 +14,16 @@ namespace RethinkDB\ODM\Metadata;
 use RethinkDB\ODM\Repository\DocumentRepository;
 
 /**
- * Class ClassMetadata
+ * Class ClassMetadata.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
 class ClassMetadata
 {
-    /** @var  string */
+    /** @var string */
     protected $class;
 
-    /** @var  string */
+    /** @var string */
     protected $table;
 
     protected $repositoryClass;

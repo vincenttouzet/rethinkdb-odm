@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -14,11 +14,10 @@ namespace RethinkDB\ODM\Bridge\Symfony\Bundle;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Class RethinkdbODMBundle
+ * Class RethinkdbODMBundle.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
 class RethinkdbODMBundle extends Bundle
 {
-
 }

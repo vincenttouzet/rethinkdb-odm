@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -11,12 +11,11 @@
 
 namespace RethinkDB\ODM\Repository;
 
-use RethinkDB\ODM\Manager;
 use RethinkDB\ODM\Mapper\DocumentMapper;
 use RethinkDB\ODM\Metadata\ClassMetadata;
 
 /**
- * Class DocumentRepository
+ * Class DocumentRepository.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */

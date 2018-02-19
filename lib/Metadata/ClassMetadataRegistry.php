@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -15,7 +15,7 @@ use RethinkDB\ODM\Exception\ClassMetadataNotFoundException;
 use RethinkDB\ODM\Metadata\Loader\LoaderInterface;
 
 /**
- * Class ClassMetadataRegistry
+ * Class ClassMetadataRegistry.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -50,6 +50,7 @@ class ClassMetadataRegistry
      * @param $class
      *
      * @return \RethinkDB\ODM\Metadata\ClassMetadata
+     *
      * @throws \RethinkDB\ODM\Exception\ClassMetadataNotFoundException
      */
     public function getClassMetadata($class)
@@ -62,7 +63,7 @@ class ClassMetadataRegistry
     }
 
     /**
-     * Retrieve all metadatas
+     * Retrieve all metadatas.
      *
      * @return \RethinkDB\ODM\Metadata\ClassMetadata[]
      */

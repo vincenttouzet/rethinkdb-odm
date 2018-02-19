@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -12,11 +12,11 @@
 namespace RethinkDB\ODM\Metadata\Loader;
 
 /**
- * Interface LoaderInterface
+ * Interface LoaderInterface.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
-Interface LoaderInterface
+interface LoaderInterface
 {
     /**
      * Load class metadatas.

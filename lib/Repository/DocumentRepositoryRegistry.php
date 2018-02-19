@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -14,7 +14,7 @@ namespace RethinkDB\ODM\Repository;
 use RethinkDB\ODM\Metadata\ClassMetadataRegistry;
 
 /**
- * Class DocumentRepositoryRegistry
+ * Class DocumentRepositoryRegistry.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -74,6 +74,7 @@ class DocumentRepositoryRegistry
             $documentRepository = $reflection->newInstance($this, $classMetadata);
             $this->repositories[$class] = $documentRepository;
         }
+
         return $this->repositories[$class];
     }
 }

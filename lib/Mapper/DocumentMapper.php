@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -15,14 +15,14 @@ use RethinkDB\ODM\Document;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Class DocumentMapper
+ * Class DocumentMapper.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
 class DocumentMapper
 {
     /**
-     * Convert a Document to a database representation
+     * Convert a Document to a database representation.
      *
      * @param Document $document
      *
@@ -34,8 +34,7 @@ class DocumentMapper
         $accessor = PropertyAccess::createPropertyAccessor();
 
         $data = [];
-        do
-        {
+        do {
             foreach ($reflection->getProperties() as $property) {
                 $data[$property->getName()] = $accessor->getValue($document, $property->getName());
             }
@@ -46,7 +45,7 @@ class DocumentMapper
     }
 
     /**
-     * Convert a database representation to a Document
+     * Convert a database representation to a Document.
      *
      * @param array $data
      * @param $class

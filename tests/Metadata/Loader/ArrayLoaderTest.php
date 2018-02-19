@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the rethinkdb-odm package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -14,7 +14,6 @@ namespace RethinkDB\ODM\Tests\Metadata\Loader;
 use PHPUnit\Framework\TestCase;
 use RethinkDB\ODM\Metadata\ClassMetadata;
 use RethinkDB\ODM\Metadata\Loader\ArrayLoader;
-use RethinkDB\ODM\Repository\DocumentRepository;
 
 class ArrayLoaderTest extends TestCase
 {
@@ -22,8 +21,8 @@ class ArrayLoaderTest extends TestCase
     {
         $loader = new ArrayLoader([
             [
-                'class'           => 'SomeClass',
-                'table'           => 'some_class',
+                'class' => 'SomeClass',
+                'table' => 'some_class',
                 'repositoryClass' => 'MyRepository',
             ],
             [

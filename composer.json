@@ -16,7 +16,8 @@
     },
     "require-dev": {
         "symfony/http-kernel": "^3.0 || ^4.0",
-        "phpunit/phpunit": "^7.0"
+        "phpunit/phpunit": "^7.0",
+        "friendsofphp/php-cs-fixer": "^2.10"
     },
     "autoload": {
         "psr-4": {

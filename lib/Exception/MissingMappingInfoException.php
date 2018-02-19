@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the rethinkdb-odm package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -12,7 +12,7 @@
 namespace RethinkDB\ODM\Exception;
 
 /**
- * Class MissingMappingInfoException
+ * Class MissingMappingInfoException.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -15,7 +15,7 @@ use RethinkDB\ODM\Exception\MissingMappingInfoException;
 use RethinkDB\ODM\Metadata\ClassMetadata;
 
 /**
- * Class ArrayLoader
+ * Class ArrayLoader.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -30,7 +30,7 @@ class ArrayLoader implements LoaderInterface
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function load()
     {

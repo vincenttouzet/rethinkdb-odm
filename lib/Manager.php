@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sauron package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -17,7 +17,7 @@ use RethinkDB\ODM\Metadata\ClassMetadataRegistry;
 use RethinkDB\ODM\Repository\DocumentRepositoryRegistry;
 
 /**
- * Class Manager
+ * Class Manager.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -50,7 +50,7 @@ class Manager
     }
 
     /**
-     * Persist document
+     * Persist document.
      *
      * @param \RethinkDB\ODM\Document $document
      */
@@ -64,7 +64,7 @@ class Manager
     }
 
     /**
-     * Insert a new document
+     * Insert a new document.
      *
      * @param \RethinkDB\ODM\Document $document
      */
@@ -89,7 +89,7 @@ class Manager
     }
 
     /**
-     * Update a document
+     * Update a document.
      *
      * @param \RethinkDB\ODM\Document $document
      */
@@ -105,7 +105,7 @@ class Manager
     }
 
     /**
-     * Remove a document
+     * Remove a document.
      *
      * @param \RethinkDB\ODM\Document $document
      */
