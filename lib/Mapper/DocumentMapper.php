@@ -12,6 +12,7 @@
 namespace RethinkDB\ODM\Mapper;
 
 use RethinkDB\ODM\Document;
+use RethinkDB\ODM\Metadata\ClassMetadata;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
@@ -28,18 +29,14 @@ class DocumentMapper
      *
      * @return array
      */
-    public static function parse(Document $document)
+    public static function parse(Document $document, ClassMetadata $metadata)
     {
-        $reflection = new \ReflectionClass(get_class($document));
         $accessor = PropertyAccess::createPropertyAccessor();
 
         $data = [];
-        do {
-            foreach ($reflection->getProperties() as $property) {
-                $data[$property->getName()] = $accessor->getValue($document, $property->getName());
-            }
-            $reflection = $reflection->getParentClass();
-        } while ($reflection);
+        foreach ($metadata->getFieldsMetadata() as $fieldMetadata) {
+            $data[$fieldMetadata->getFieldName()] = $accessor->getValue($document, $fieldMetadata->getPropertyName());
+        }
 
         return $data;
     }
@@ -52,13 +49,16 @@ class DocumentMapper
      *
      * @return Document Instance of $class
      */
-    public static function unparse($data, $class)
+    public static function unparse($data, ClassMetadata $metadata)
     {
+        $class = $metadata->getClass();
         $accessor = PropertyAccess::createPropertyAccessor();
 
+        // Create document
         $document = new $class();
-        foreach ($data as $key => $value) {
-            if ('id' === $key) {
+        foreach ($metadata->getFieldsMetadata() as $fieldMetadata) {
+            $value = $data[$fieldMetadata->getFieldName()];
+            if ('id' === $fieldMetadata->getPropertyName()) {
                 $reflectionClass = new \ReflectionClass($class);
                 while (!$reflectionClass->hasProperty('id')) {
                     $reflectionClass = $reflectionClass->getParentClass();
@@ -67,7 +67,7 @@ class DocumentMapper
                 $propertyReflection->setAccessible(true);
                 $propertyReflection->setValue($document, $value);
             } else {
-                $accessor->setValue($document, $key, $value);
+                $accessor->setValue($document, $fieldMetadata->getPropertyName(), $value);
             }
         }
 

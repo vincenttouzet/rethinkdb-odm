@@ -11,8 +11,10 @@
 
 namespace RethinkDB\ODM\Metadata\Loader;
 
+use RethinkDB\ODM\Exception\MissingFieldMappingInfoException;
 use RethinkDB\ODM\Exception\MissingMappingInfoException;
 use RethinkDB\ODM\Metadata\ClassMetadata;
+use RethinkDB\ODM\Metadata\FieldMetadata;
 
 /**
  * Class ArrayLoader.
@@ -43,10 +45,45 @@ class ArrayLoader implements LoaderInterface
             if (!isset($mapping['table']) || empty($mapping['table'])) {
                 throw new MissingMappingInfoException('table');
             }
-            $classMetadata = new ClassMetadata($mapping['class'], $mapping['table']);
+            // fields
+            if (!isset($mapping['fields'])) {
+                throw new MissingMappingInfoException('fields');
+            }
+            $fields = [];
+            foreach ($mapping['fields'] as $name => $fieldMapping) {
+                $fieldMetadata = new FieldMetadata();
+                if (is_array($fieldMapping)) {
+                    // full declaration
+                    if (!isset($fieldMapping['fieldName'])) {
+                        throw new MissingFieldMappingInfoException($mapping['class'], 'fieldName');
+                    }
+                    $fieldMetadata->setFieldName($fieldMapping['fieldName']);
+                    if (isset($fieldMapping['propertyName'])) {
+                        $fieldMetadata->setPropertyName($fieldMapping['propertyName']);
+                    } else {
+                        if (is_string($name)) {
+                            $fieldMetadata->setPropertyName($name);
+                        } else {
+                            throw new MissingFieldMappingInfoException($mapping['class'], 'propertyName');
+                        }
+                    }
+                } else {
+                    // not a string index ?
+                    if (!is_string($name)) {
+                        $fieldMetadata->setPropertyName($fieldMapping);
+                        $fieldMetadata->setFieldName($fieldMapping);
+                    } else {
+                        $fieldMetadata->setPropertyName($name);
+                        $fieldMetadata->setFieldName($fieldMapping);
+                    }
+                }
+                $fields[] = $fieldMetadata;
+            }
+            $classMetadata = new ClassMetadata($mapping['class'], $mapping['table'], $fields);
             if (isset($mapping['repositoryClass'])) {
                 $classMetadata->setRepositoryClass($mapping['repositoryClass']);
             }
+
             $metadatas[] = $classMetadata;
         }
 

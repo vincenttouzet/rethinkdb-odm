@@ -47,7 +47,7 @@ class DocumentRepository
 
         if ($result) {
             // unparse
-            $result = DocumentMapper::unparse($result, $this->getClassMetadata()->getClass());
+            $result = DocumentMapper::unparse($result, $this->getClassMetadata());
         }
 
         return $result;

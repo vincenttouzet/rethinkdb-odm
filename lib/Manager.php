@@ -81,7 +81,7 @@ class Manager
         $propertyReflection->setAccessible(true);
         $propertyReflection->setValue($document, $id);
 
-        $data = DocumentMapper::parse($document);
+        $data = DocumentMapper::parse($document, $this->getClassMetadata(get_class($document)));
 
         $this->getTableForDocument($document)
             ->insert($data)
@@ -95,7 +95,7 @@ class Manager
      */
     protected function update(Document $document)
     {
-        $data = DocumentMapper::parse($document);
+        $data = DocumentMapper::parse($document, $this->getClassMetadata(get_class($document)));
         unset($data['id']);
 
         $this->getTableForDocument($document)

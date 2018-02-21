@@ -11,6 +11,7 @@
 
 namespace RethinkDB\ODM\Metadata;
 
+use RethinkDB\ODM\Exception\FieldMetadataNotFoundException;
 use RethinkDB\ODM\Repository\DocumentRepository;
 
 /**
@@ -26,12 +27,25 @@ class ClassMetadata
     /** @var string */
     protected $table;
 
+    /** @var string */
     protected $repositoryClass;
 
-    public function __construct($class, $table, $repositoryClass = DocumentRepository::class)
+    /** @var \RethinkDB\ODM\Metadata\FieldMetadata[] */
+    protected $fieldsMetadata = [];
+
+    /**
+     * ClassMetadata constructor.
+     *
+     * @param string                                  $class
+     * @param string                                  $table
+     * @param \RethinkDB\ODM\Metadata\FieldMetadata[] $fieldsMetadata
+     * @param string                                  $repositoryClass
+     */
+    public function __construct($class, $table, $fieldsMetadata, $repositoryClass = DocumentRepository::class)
     {
         $this->setClass($class);
         $this->setTable($table);
+        $this->setFieldsMetadata($fieldsMetadata);
         $this->setRepositoryClass($repositoryClass);
     }
 
@@ -91,6 +105,37 @@ class ClassMetadata
     public function setRepositoryClass(string $repositoryClass)
     {
         $this->repositoryClass = $repositoryClass;
+
+        return $this;
+    }
+
+    public function getFieldMetadata($propertyName)
+    {
+        foreach ($this->getFieldsMetadata() as $fieldMetadata) {
+            if ($propertyName === $fieldMetadata->getPropertyName()) {
+                return $fieldMetadata;
+            }
+        }
+
+        throw new FieldMetadataNotFoundException($this->getClass(), $propertyName);
+    }
+
+    /**
+     * @return \RethinkDB\ODM\Metadata\FieldMetadata[]
+     */
+    public function getFieldsMetadata(): array
+    {
+        return $this->fieldsMetadata;
+    }
+
+    /**
+     * @param \RethinkDB\ODM\Metadata\FieldMetadata[] $fieldsMetadata
+     *
+     * @return self
+     */
+    public function setFieldsMetadata(array $fieldsMetadata)
+    {
+        $this->fieldsMetadata = $fieldsMetadata;
 
         return $this;
     }
