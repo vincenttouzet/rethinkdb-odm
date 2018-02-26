@@ -12,14 +12,13 @@
     "require": {
         "danielmewes/php-rql": "^2.3",
         "symfony/property-access": "^3.0 || ^4.0",
-        "ramsey/uuid": "^3.0",
-        "symfony/config": "^3.0 || ^4.0",
-        "symfony/console": "^3.0 || ^4.0"
+        "ramsey/uuid": "^3.0"
     },
     "require-dev": {
         "symfony/http-kernel": "^3.0 || ^4.0",
         "phpunit/phpunit": "^7.0",
-        "friendsofphp/php-cs-fixer": "^2.10"
+        "friendsofphp/php-cs-fixer": "^2.10",
+        "symfony/console": "^4.0"
     },
     "autoload": {
         "psr-4": {
@@ -32,6 +31,8 @@
         }
     },
     "suggest": {
-        "symfony/http-kernel": "Needed to use integration for Symfony bundle"
-    }
+        "symfony/http-kernel": "Needed to use integration for Symfony bundle",
+        "symfony/console": "Needed to use the rethinkdb binary"
+    },
+    "bin": ["bin/rethinkdb"]
 }
