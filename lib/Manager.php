@@ -47,6 +47,7 @@ class Manager
         $this->connection = $connection;
         $this->metadataRegistry = $metadataRegistry;
         $this->drRegistry = $drRegistry;
+        $drRegistry->setManager($this);
     }
 
     /**

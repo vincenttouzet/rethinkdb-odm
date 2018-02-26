@@ -3,3 +3,4 @@
 cli-config.php
 phpunit.xml
 vendor
+tests/bootstrap.php
