@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the rethinkdb-odm package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -18,7 +18,7 @@ use RethinkDB\ODM\Repository\DocumentRepositoryRegistry;
 use RethinkDB\ODM\Tests\Document\Person;
 
 /**
- * Class ManagerAwareTestCase
+ * Class ManagerAwareTestCase.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -34,16 +34,16 @@ trait ManagerAwareTestCase
     {
         if (!$this->manager) {
             $connection = new \r\Connection([
-                'host'     => RETHINKDB_HOST,
-                'port'     => RETHINKDB_PORT,
-                'user'     => RETHINKDB_USER,
+                'host' => RETHINKDB_HOST,
+                'port' => RETHINKDB_PORT,
+                'user' => RETHINKDB_USER,
                 'password' => RETHINKDB_PASSWORD,
-                'db'       => RETHINKDB_DB,
+                'db' => RETHINKDB_DB,
             ]);
 
             $loader = new ArrayLoader([[
-                'class'  => Person::class,
-                'table'  => 'person',
+                'class' => Person::class,
+                'table' => 'person',
                 'fields' => ['id', 'firstName', 'lastName'],
             ]]);
 

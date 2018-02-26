@@ -54,7 +54,7 @@ class DocumentMapperTest extends TestCase
     {
         $data = [
             'firstname' => 'Vincent',
-            'lastname'  => 'Touzet',
+            'lastname' => 'Touzet',
         ];
 
         $document = DocumentMapper::unparse($data, $this->classMetadata);

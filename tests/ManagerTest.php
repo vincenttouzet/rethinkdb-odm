@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the rethinkdb-odm package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -59,7 +59,7 @@ class ManagerTest extends TestCase
     public function testRemove()
     {
         $document = [
-            'id'       => Uuid::uuid5(Uuid::NAMESPACE_DNS, Person::class)->toString(),
+            'id' => Uuid::uuid5(Uuid::NAMESPACE_DNS, Person::class)->toString(),
             'fistName' => 'Vincent',
             'lastName' => 'Touzet',
         ];

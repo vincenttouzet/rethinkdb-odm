@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the rethinkdb-odm package.
+ * This file is part of the RethinkDB ODM project.
  *
  * (c) Vincent Touzet <vincent.touzet@gmail.com>
  *
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 /**
- * Class TablesCreateCommand
+ * Class TablesCreateCommand.
  *
  * @author Vincent Touzet <vincent.touzet@gmail.com>
  */
@@ -34,7 +34,6 @@ class SchemaUpdateCommand extends AbstractCommand
     {
         $this->addOption('force', 'f', InputOption::VALUE_NONE);
     }
-
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {

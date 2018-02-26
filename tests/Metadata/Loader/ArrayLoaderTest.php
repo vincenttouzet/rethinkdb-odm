@@ -21,10 +21,10 @@ class ArrayLoaderTest extends TestCase
     {
         $loader = new ArrayLoader([
             [
-                'class'           => 'SomeClass',
-                'table'           => 'some_class',
+                'class' => 'SomeClass',
+                'table' => 'some_class',
                 'repositoryClass' => 'MyRepository',
-                'fields'          => [
+                'fields' => [
                     // mapped as id in database
                     'id',
                     // customize fieldName
@@ -33,14 +33,14 @@ class ArrayLoaderTest extends TestCase
                     ],
                     // full define
                     [
-                        'fieldName'    => 'prenom',
+                        'fieldName' => 'prenom',
                         'propertyName' => 'firstname',
                     ],
                 ],
             ],
             [
-                'class'  => 'AnotherClass',
-                'table'  => 'another_table',
+                'class' => 'AnotherClass',
+                'table' => 'another_table',
                 'fields' => ['id', 'name'],
             ],
         ]);
@@ -71,8 +71,8 @@ class ArrayLoaderTest extends TestCase
     public function testFieldDeclaration1()
     {
         $loader = new ArrayLoader([[
-            'class'  => 'SomeClass',
-            'table'  => 'some_table',
+            'class' => 'SomeClass',
+            'table' => 'some_table',
             'fields' => ['name'],
         ]]);
         $metadata = $loader->load();
@@ -85,8 +85,8 @@ class ArrayLoaderTest extends TestCase
     public function testFieldDeclaration2()
     {
         $loader = new ArrayLoader([[
-            'class'  => 'SomeClass',
-            'table'  => 'some_table',
+            'class' => 'SomeClass',
+            'table' => 'some_table',
             'fields' => [
                 'name' => 'field_name',
             ],
@@ -101,8 +101,8 @@ class ArrayLoaderTest extends TestCase
     public function testFieldDeclaration3()
     {
         $loader = new ArrayLoader([[
-            'class'  => 'SomeClass',
-            'table'  => 'some_table',
+            'class' => 'SomeClass',
+            'table' => 'some_table',
             'fields' => [
                 'name' => [
                     'fieldName' => 'field_name',
@@ -119,12 +119,12 @@ class ArrayLoaderTest extends TestCase
     public function testFieldDeclaration4()
     {
         $loader = new ArrayLoader([[
-            'class'  => 'SomeClass',
-            'table'  => 'some_table',
+            'class' => 'SomeClass',
+            'table' => 'some_table',
             'fields' => [
                 'name' => [
                     'propertyName' => 'property_name',
-                    'fieldName'    => 'field_name',
+                    'fieldName' => 'field_name',
                 ],
             ],
         ]]);
@@ -192,8 +192,8 @@ class ArrayLoaderTest extends TestCase
     public function testMissingFieldNameException()
     {
         $loader = new ArrayLoader([[
-            'class'  => 'SomeClass',
-            'table'  => 'some_table',
+            'class' => 'SomeClass',
+            'table' => 'some_table',
             'fields' => [
                 [
                     'propertyName' => 'name',

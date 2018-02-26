@@ -43,8 +43,7 @@ class Manager
         \r\Connection $connection,
         ClassMetadataRegistry $metadataRegistry,
         DocumentRepositoryRegistry $drRegistry
-    )
-    {
+    ) {
         $this->connection = $connection;
         $this->metadataRegistry = $metadataRegistry;
         $this->drRegistry = $drRegistry;
