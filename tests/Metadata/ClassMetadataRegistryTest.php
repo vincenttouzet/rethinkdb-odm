@@ -23,8 +23,8 @@ class ClassMetadataRegistryTest extends TestCase
     protected function setUp()
     {
         $loader = new ArrayLoader([[
-            'class' => 'MyClass',
-            'table' => 'my_table',
+            'class'  => 'MyClass',
+            'table'  => 'my_table',
             'fields' => ['id', 'name'],
         ]]);
         $this->registry = new ClassMetadataRegistry($loader);

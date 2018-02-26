@@ -13,6 +13,7 @@ namespace RethinkDB\ODM\Console;
 
 use RethinkDB\ODM\Console\Command\DatabaseCreateCommand;
 use RethinkDB\ODM\Console\Command\DatabaseDropCommand;
+use RethinkDB\ODM\Console\Command\SchemaUpdateCommand;
 use RethinkDB\ODM\Manager;
 
 /**
@@ -29,6 +30,7 @@ class Application extends \Symfony\Component\Console\Application
         $this->addCommands([
             new DatabaseCreateCommand($manager),
             new DatabaseDropCommand($manager),
+            new SchemaUpdateCommand($manager),
         ]);
     }
 }

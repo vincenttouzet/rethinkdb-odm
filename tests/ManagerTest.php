@@ -13,46 +13,20 @@ namespace RethinkDB\ODM\Tests;
 
 use PHPUnit\Framework\TestCase;
 use Ramsey\Uuid\Uuid;
-use RethinkDB\ODM\Manager;
-use RethinkDB\ODM\Metadata\ClassMetadataRegistry;
-use RethinkDB\ODM\Metadata\Loader\ArrayLoader;
-use RethinkDB\ODM\Repository\DocumentRepositoryRegistry;
 use RethinkDB\ODM\Tests\Document\Person;
 
 class ManagerTest extends TestCase
 {
-    /** @var \r\Connection */
-    protected $connection;
-
-    /** @var \RethinkDB\ODM\Manager */
-    protected $manager;
+    use ManagerAwareTestCase;
 
     protected function setUp()
     {
-        $this->connection = new \r\Connection([
-            'host'     => RETHINKDB_HOST,
-            'port'     => RETHINKDB_PORT,
-            'user'     => RETHINKDB_USER,
-            'password' => RETHINKDB_PASSWORD,
-            'db'       => RETHINKDB_DB,
-        ]);
-
-        $loader = new ArrayLoader([[
-            'class'  => Person::class,
-            'table'  => 'person',
-            'fields' => ['id', 'firstName', 'lastName'],
-        ]]);
-
-        $metadataRegistry = new ClassMetadataRegistry($loader);
-        $repositoryRegistry = new DocumentRepositoryRegistry($metadataRegistry);
-
-        $this->manager = new Manager($this->connection, $metadataRegistry, $repositoryRegistry);
-        \r\tableCreate('person')->run($this->connection);
+        \r\tableCreate('person')->run($this->getManager()->getConnection());
     }
 
     protected function tearDown()
     {
-        \r\tableDrop('person')->run($this->connection);
+        \r\tableDrop('person')->run($this->getManager()->getConnection());
     }
 
     public function testPersist()
@@ -64,7 +38,7 @@ class ManagerTest extends TestCase
         $this->manager->persist($person);
 
         // reload
-        $result = \r\table('person')->get($person->getId())->run($this->connection);
+        $result = \r\table('person')->get($person->getId())->run($this->getManager()->getConnection());
         $this->assertEquals(3, $result->count());
         $this->assertEquals('Vincent', $result->offsetGet('firstName'));
         $this->assertEquals('Touzet', $result->offsetGet('lastName'));
@@ -76,7 +50,7 @@ class ManagerTest extends TestCase
         $this->manager->persist($person);
 
         // reload
-        $result = \r\table('person')->get($person->getId())->run($this->connection);
+        $result = \r\table('person')->get($person->getId())->run($this->getManager()->getConnection());
         $this->assertEquals(3, $result->count());
         $this->assertEquals('John', $result->offsetGet('firstName'));
         $this->assertEquals('Doe', $result->offsetGet('lastName'));
@@ -89,9 +63,9 @@ class ManagerTest extends TestCase
             'fistName' => 'Vincent',
             'lastName' => 'Touzet',
         ];
-        \r\table('person')->insert($document)->run($this->connection);
+        \r\table('person')->insert($document)->run($this->getManager()->getConnection());
 
-        $count = \r\table('person')->count()->run($this->connection);
+        $count = \r\table('person')->count()->run($this->getManager()->getConnection());
         $this->assertEquals(1, $count);
 
         // reload from repository
@@ -99,7 +73,7 @@ class ManagerTest extends TestCase
 
         $this->manager->remove($person);
 
-        $count = \r\table('person')->count()->run($this->connection);
+        $count = \r\table('person')->count()->run($this->getManager()->getConnection());
         $this->assertEquals(0, $count);
     }
 }

@@ -45,7 +45,7 @@ class DocumentMapper
      * Convert a database representation to a Document.
      *
      * @param array $data
-     * @param $class
+     * @param       $class
      *
      * @return Document Instance of $class
      */

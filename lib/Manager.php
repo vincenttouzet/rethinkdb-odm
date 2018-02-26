@@ -43,7 +43,8 @@ class Manager
         \r\Connection $connection,
         ClassMetadataRegistry $metadataRegistry,
         DocumentRepositoryRegistry $drRegistry
-    ) {
+    )
+    {
         $this->connection = $connection;
         $this->metadataRegistry = $metadataRegistry;
         $this->drRegistry = $drRegistry;
@@ -124,6 +125,22 @@ class Manager
     public function getConnection()
     {
         return $this->connection;
+    }
+
+    /**
+     * @return \RethinkDB\ODM\Metadata\ClassMetadataRegistry
+     */
+    public function getClassMetadataRegistry(): \RethinkDB\ODM\Metadata\ClassMetadataRegistry
+    {
+        return $this->metadataRegistry;
+    }
+
+    /**
+     * @return \RethinkDB\ODM\Repository\DocumentRepositoryRegistry
+     */
+    public function getDocumentRepositoryRegistry(): \RethinkDB\ODM\Repository\DocumentRepositoryRegistry
+    {
+        return $this->drRegistry;
     }
 
     /**
