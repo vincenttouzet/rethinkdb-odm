@@ -14,7 +14,7 @@ services:
         arguments:
             - '@rethinkdb_odm.connection'
             - '@rethinkdb_odm.class_metadata.registry'
-            - '@rethindb_odm.document_repository.registry'
+            - '@rethinkdb_odm.document_repository.registry'
         public: true
 
     rethinkdb_odm.class_metadata.registry:
@@ -22,9 +22,30 @@ services:
         arguments:
             - '@rethinkdb_odm.class_metadata.loader'
 
-    rethindb_odm.document_repository.registry:
+    rethinkdb_odm.document_repository.registry:
         class: RethinkDB\ODM\Repository\DocumentRepositoryRegistry
         arguments:
             - '@rethinkdb_odm.class_metadata.registry'
         calls:
             - [setManager, ['@rethinkdb_odm.manager']]
+
+    rethinkdb_odm.command.database_create:
+        class: RethinkDB\ODM\Bridge\Symfony\Bundle\Command\DatabaseCreateCommand
+        arguments:
+            - '@rethinkdb_odm.manager'
+        tags:
+            - { name: 'console.command' }
+
+    rethinkdb_odm.command.database_drop:
+        class: RethinkDB\ODM\Bridge\Symfony\Bundle\Command\DatabaseDropCommand
+        arguments:
+            - '@rethinkdb_odm.manager'
+        tags:
+            - { name: 'console.command' }
+
+    rethinkdb_odm.command.database_update:
+        class: RethinkDB\ODM\Bridge\Symfony\Bundle\Command\SchemaUpdateCommand
+        arguments:
+            - '@rethinkdb_odm.manager'
+        tags:
+            - { name: 'console.command' }
