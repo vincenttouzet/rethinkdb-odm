@@ -9,7 +9,7 @@ services:
               password: '%rethinkdb_odm.connection.password%'
               db:       '%rethinkdb_odm.connection.database%'
 
-    rethinkdb_odm.manager:
+    RethinkDB\ODM\Manager:
         class: RethinkDB\ODM\Manager
         arguments:
             - '@rethinkdb_odm.connection'
@@ -17,17 +17,26 @@ services:
             - '@rethinkdb_odm.document_repository.registry'
         public: true
 
-    rethinkdb_odm.class_metadata.registry:
+    rethinkdb_odm.manager:
+        alias: RethinkDB\ODM\Manager
+
+    RethinkDB\ODM\Metadata\ClassMetadataRegistry:
         class: RethinkDB\ODM\Metadata\ClassMetadataRegistry
         arguments:
             - '@rethinkdb_odm.class_metadata.loader'
 
-    rethinkdb_odm.document_repository.registry:
+    rethinkdb_odm.class_metadata.registry:
+        alias: RethinkDB\ODM\Metadata\ClassMetadataRegistry
+
+    RethinkDB\ODM\Repository\DocumentRepositoryRegistry:
         class: RethinkDB\ODM\Repository\DocumentRepositoryRegistry
         arguments:
             - '@rethinkdb_odm.class_metadata.registry'
         calls:
             - [setManager, ['@rethinkdb_odm.manager']]
+
+    rethinkdb_odm.document_repository.registry:
+        alias: RethinkDB\ODM\Repository\DocumentRepositoryRegistry
 
     rethinkdb_odm.command.database_create:
         class: RethinkDB\ODM\Bridge\Symfony\Bundle\Command\DatabaseCreateCommand
