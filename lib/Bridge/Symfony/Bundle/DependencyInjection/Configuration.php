@@ -44,6 +44,7 @@ class Configuration implements ConfigurationInterface
                             ->arrayPrototype()
                                 ->children()
                                     ->scalarNode('class')->end()
+                                    ->scalarNode('repositoryClass')->end()
                                     ->scalarNode('table')->end()
                                     ->arrayNode('fields')
                                         ->useAttributeAsKey('propertyName')
