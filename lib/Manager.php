@@ -72,7 +72,7 @@ class Manager
     protected function insert(Document $document)
     {
         // generate a new id
-        $id = Uuid::uuid5(Uuid::NAMESPACE_DNS, get_class($document));
+        $id = Uuid::uuid4()->toString();
         // set into document
         $reflectionClass = new \ReflectionClass(get_class($document));
         while (!$reflectionClass->hasProperty('id')) {
