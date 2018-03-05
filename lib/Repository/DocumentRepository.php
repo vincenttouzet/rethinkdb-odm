@@ -43,9 +43,38 @@ class DocumentRepository
     {
         $connection = $this->getManager()->getConnection();
 
-        $result = \r\table($this->getClassMetadata()->getTable())->get($id)->run($connection);
+        $result = $this->getTable()
+            ->get($id)
+            ->run($connection);
 
         if ($result) {
+            // unparse
+            $result = DocumentMapper::unparse($result, $this->getClassMetadata());
+        }
+
+        return $result;
+    }
+
+    public function findOneBy(array $criterias = [])
+    {
+        $connection = $this->getManager()->getConnection();
+
+        $classMetadata = $this->getClassMetadata();
+        $predicate = [];
+        foreach ($criterias as $criteria => $condition) {
+            $fieldMetadata = $classMetadata->getFieldMetadata($criteria);
+            $predicate[$fieldMetadata->getFieldName()] = $condition;
+        }
+
+        $cursor = $this->getTable()
+            ->filter($predicate)
+            ->limit(1)
+            ->run($connection);
+
+        $result = null;
+
+        if ($cursor->valid()) {
+            $result = $cursor->current();
             // unparse
             $result = DocumentMapper::unparse($result, $this->getClassMetadata());
         }
@@ -75,5 +104,19 @@ class DocumentRepository
     public function getManager()
     {
         return $this->registry->getManager();
+    }
+
+    /**
+     * @return \r\Queries\Tables\Table
+     */
+    protected function getTable($class = null)
+    {
+        if (null === $class) {
+            $table = $this->getClassMetadata()->getTable();
+        } else {
+            $table = $this->getManager()->getClassMetadata($class)->getTable();
+        }
+
+        return \r\table($table);
     }
 }
